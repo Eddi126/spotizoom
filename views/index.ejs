@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Spotizoom — Daily Giveaway for USA, Europe, Russia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join Spotizoom — a daily giveaway platform for the USA, Europe, and Russia. Win prizes every day! Participate by staying on the main page for 20 seconds.">
+  <meta name="keywords" content="giveaway, daily winner, contest, USA, Europe, Russia, Spotizoom, win, prize, sweepstakes, social, music, tiktok, instagram, youtube">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Spotizoom">
+  <meta property="og:title" content="Spotizoom — Daily Giveaway" />
+  <meta property="og:description" content="Win prizes every day! Join Spotizoom and become the daily winner. For USA, Europe, Russia." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://spotizoom.com/" />
+  <meta property="og:image" content="https://spotizoom.com/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <link rel="canonical" href="https://spotizoom.com/" />
+  <link rel="alternate" href="https://spotizoom.com/" hreflang="en" />
+  <link rel="alternate" href="https://spotizoom.com/" hreflang="ru" />
+  <link rel="alternate" href="https://spotizoom.com/" hreflang="x-default" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+</head>
+<body>
+  <header class="header" role="banner">Spotizoom</header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="active" style="margin-right:auto;">Home</a>
+    <a href="/profile" style="margin:0 auto;">Profile</a>
+    <% if (user) { %>
+      <a href="/logout" style="margin-left:auto;">Logout</a>
+    <% } else { %>
+      <a href="/login" style="margin-left:auto;">Login</a>
+    <% } %>
+  </nav>
+  <div class="container">
+    <section class="winner" itemscope itemtype="https://schema.org/Person">
+      <h1>Daily Winner:</h1>
+      <% if (winner) { %>
+        <h2 style="word-break:break-word;" itemprop="name"><%= winner.name %></h2>
+        <% if (winner.description) { %>
+          <div style="margin-bottom:12px;word-break:break-word;" itemprop="description"><b>Description:</b> <%= winner.description %></div>
+        <% } %>
+        <div class="winner-profile winner-social-block" style="max-width:340px;margin:0 auto;display:flex;flex-direction:column;align-items:flex-start;flex-wrap:wrap;word-break:break-word;">
+          <% if (winner.youtube) { %>
+            <div><b>YouTube:</b> 
+              <% if (/^https?:\/\//.test(winner.youtube)) { %>
+                <a href="<%= winner.youtube %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="YouTube"><%= winner.youtube %></a>
+              <% } else { %>
+                <a href="https://youtube.com/<%= winner.youtube.replace(/^@/,'') %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="YouTube"><%= winner.youtube %></a>
+              <% } %>
+            </div>
+          <% } %>
+          <% if (winner.tiktok) { %>
+            <div><b>TikTok:</b> 
+              <% if (/^https?:\/\//.test(winner.tiktok)) { %>
+                <a href="<%= winner.tiktok %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="TikTok"><%= winner.tiktok %></a>
+              <% } else { %>
+                <a href="https://tiktok.com/@<%= winner.tiktok.replace(/^@/,"") %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="TikTok"><%= winner.tiktok %></a>
+              <% } %>
+            </div>
+          <% } %>
+          <% if (winner.instagram) { %>
+            <div><b>Instagram:</b> 
+              <% if (/^https?:\/\//.test(winner.instagram)) { %>
+                <a href="<%= winner.instagram %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Instagram"><%= winner.instagram %></a>
+              <% } else { %>
+                <a href="https://instagram.com/<%= winner.instagram.replace(/^@/,"") %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Instagram"><%= winner.instagram %></a>
+              <% } %>
+            </div>
+          <% } %>
+          <% if (winner.facebook) { %>
+            <div><b>Facebook:</b> 
+              <% if (/^https?:\/\//.test(winner.facebook)) { %>
+                <a href="<%= winner.facebook %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Facebook"><%= winner.facebook %></a>
+              <% } else { %>
+                <a href="https://facebook.com/<%= winner.facebook.replace(/^@/,"") %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Facebook"><%= winner.facebook %></a>
+              <% } %>
+            </div>
+          <% } %>
+          <% if (winner.telegram) { %>
+            <div><b>Telegram:</b> 
+              <% if (/^https?:\/\//.test(winner.telegram)) { %>
+                <a href="<%= winner.telegram %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Telegram"><%= winner.telegram %></a>
+              <% } else { %>
+                <a href="https://t.me/<%= winner.telegram.replace(/^@/,"") %>" target="_blank" rel="noopener noreferrer" itemprop="sameAs" aria-label="Telegram"><%= winner.telegram %></a>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+        <% if (user && winner && user.id === winner.user_id) { %>
+          <div class="winner-notification" style="margin:18px 0;padding:12px 18px;background:#e6ffe6;border:1px solid #2ecc40;border-radius:6px;color:#222;font-weight:600;text-align:center;">
+            Congratulations! You are today's winner!
+          </div>
+        <% } %>
+      <% } else { %>
+        <h2>No winner selected yet</h2>
+      <% } %>
+    </section>
+      <% if (user && !eligible) { %>
+        <div class="timer-block">
+          <span id="timer-label">Time left to participate:</span>
+          <span id="timer" style="font-weight:600;font-size:1.3em;">20</span> seconds
+        </div>
+        <script src="/timer.js"></script>
+      <% } %>
+      <section class="participation-terms">
+        <h3>How to participate</h3>
+        <ul>
+           <li>Sign up or log in to the site.</li>
+           <li>Stay on the main page for at least 20 seconds.</li>
+           <li>Every day, one winner is selected among all participants.</li>
+          <li>The winner is chosen randomly once a day at <%= winnerTime %> New York time (EST).</li>
+        </ul>
+        <button class="share-btn" onclick="shareSite()">Share with friends</button>
+      </section>
+      <script>
+        function shareSite() {
+          const url = window.location.origin;
+          if (navigator.share) {
+            navigator.share({
+              title: 'Spotizoom — Daily Giveaway!',
+              text: 'Join Spotizoom and participate in the daily giveaway!',
+              url
+            });
+          } else {
+            navigator.clipboard.writeText(url);
+            alert('Site link copied to clipboard!');
+          }
+        }
+      </script>
+    <div class="auth"></div>
+    <% if (eligible) { %>
+      <div class="status">You are participating in today’s giveaway!</div>
+    <% } else if (user) { %>
+      <!-- status message removed, only timer shown -->
+    <% } %>
+  </div>
+  <footer class="footer" role="contentinfo">© Spotizoom, 2025 | <a href="/privacy" target="_blank" rel="nofollow">Privacy Policy</a></footer>
+</body>
+</html>

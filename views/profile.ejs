@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Profile | Spotizoom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Your Spotizoom profile. Edit your details and participate in daily giveaways for USA, Europe, and Russia.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Profile — Spotizoom" />
+  <meta property="og:description" content="Edit your Spotizoom profile and join the daily giveaway!" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://spotizoom.com/profile" />
+  <meta property="og:image" content="https://spotizoom.com/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <link rel="canonical" href="https://spotizoom.com/profile" />
+  <link rel="alternate" href="https://spotizoom.com/profile" hreflang="en" />
+  <link rel="alternate" href="https://spotizoom.com/profile" hreflang="ru" />
+  <link rel="alternate" href="https://spotizoom.com/profile" hreflang="x-default" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="header" role="banner">Spotizoom</header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" style="margin-right:auto;">Home</a>
+    <a href="/profile" class="active" style="margin:0 auto;">Profile</a>
+    <% if (user) { %>
+      <a href="/logout" style="margin-left:auto;">Logout</a>
+    <% } else { %>
+      <a href="/login" style="margin-left:auto;">Login</a>
+    <% } %>
+  </nav>
+  <div class="login-mobile-wrap">
+    <div class="login-card">
+      <h2 class="login-title">Profile</h2>
+      <form class="login-form" method="post" action="/profile">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label for="displayName">Name:</label>
+        <input type="text" id="displayName" name="displayName" value="<%= user.displayName || user.name %>" required maxlength="32">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="3" maxlength="512"><%= user.description || '' %></textarea>
+        <label for="tiktok">TikTok:</label>
+        <input type="text" id="tiktok" name="tiktok" value="<%= user.tiktok || '' %>" placeholder="@username">
+        <label for="instagram">Instagram:</label>
+        <input type="text" id="instagram" name="instagram" value="<%= user.instagram || '' %>" placeholder="@username">
+        <label for="facebook">Facebook:</label>
+        <input type="text" id="facebook" name="facebook" value="<%= user.facebook || '' %>" placeholder="@username">
+        <label for="telegram">Telegram:</label>
+        <input type="text" id="telegram" name="telegram" value="<%= user.telegram || '' %>" placeholder="@username">
+        <label for="youtube">YouTube:</label>
+        <input type="text" id="youtube" name="youtube" value="<%= user.youtube || '' %>" placeholder="@username">
+                <div style="margin-top:16px; margin-bottom:8px;">
+                  <label style="display:flex;align-items:center;gap:8px;">
+                    <input type="checkbox" name="subscribe_winner" value="1" <%= (user.subscribe_winner === undefined || user.subscribe_winner === 1) ? 'checked' : '' %>>
+                    Receive winner profile notification by email
+                  </label>
+                </div>
+        <button type="submit">Save</button>
+      </form>
+      <a class="login-btn" href="/logout" style="background:#e53e3e;color:#fff;margin-top:10px;">Logout</a>
+    </div>
+  </div>
+  <footer class="footer" role="contentinfo">© Spotizoom, 2025 | <a href="/privacy" target="_blank" rel="nofollow">Privacy Policy</a></footer>
+</body>
+</html>

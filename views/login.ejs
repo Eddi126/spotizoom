@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login — Spotizoom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to Spotizoom to participate in daily giveaways for USA, Europe, and Russia.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Login — Spotizoom" />
+  <meta property="og:description" content="Login to Spotizoom and join the daily giveaway!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://spotizoom.com/login" />
+  <meta property="og:image" content="https://spotizoom.com/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <link rel="canonical" href="https://spotizoom.com/login" />
+  <link rel="alternate" href="https://spotizoom.com/login" hreflang="en" />
+  <link rel="alternate" href="https://spotizoom.com/login" hreflang="ru" />
+  <link rel="alternate" href="https://spotizoom.com/login" hreflang="x-default" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="header">Spotizoom</div>
+  <div class="nav">
+    <a href="/" style="margin-right:auto;">Home</a>
+    <a href="/profile" style="margin:0 auto;">Profile</a>
+    <% if (user) { %>
+      <a href="/logout" style="margin-left:auto;">Logout</a>
+    <% } else { %>
+      <a href="/login" class="active" style="margin-left:auto;">Login</a>
+    <% } %>
+  </div>
+  <div class="login-mobile-wrap">
+    <div class="login-card">
+      <h2 class="login-title">Login</h2>
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="login-error"><%= error %></div>
+      <% } %>
+      <form class="login-form" method="post" action="/auth/email">
+        <input type="email" name="email" placeholder="Email" required autocomplete="username">
+        <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+        <button type="submit">Sign in with Email</button>
+        <div style="text-align:right;margin-top:8px;">
+          <a href="/reset-password-request" style="font-size:0.95em;">Forgot password?</a>
+        </div>
+      </form>
+      <div class="login-or">or</div>
+      <a class="login-btn login-google" href="/auth/google">Sign in with Google</a>
+      <a class="login-btn login-tiktok" href="/auth/tiktok">Sign in with TikTok</a>
+    </div>
+  </div>
+  <footer class="footer" role="contentinfo">© Spotizoom, 2025 | <a href="/privacy" target="_blank" rel="nofollow">Privacy Policy</a></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin — Spotizoom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Spotizoom admin panel. Manage daily giveaway settings for USA, Europe, and Russia.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Admin — Spotizoom" />
+  <meta property="og:description" content="Spotizoom admin panel. Manage daily giveaway settings." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://spotizoom.com/admin" />
+  <meta property="og:image" content="https://spotizoom.com/og-image.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <link rel="canonical" href="https://spotizoom.com/admin" />
+  <link rel="alternate" href="https://spotizoom.com/admin" hreflang="en" />
+  <link rel="alternate" href="https://spotizoom.com/admin" hreflang="ru" />
+  <link rel="alternate" href="https://spotizoom.com/admin" hreflang="x-default" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="header" role="banner">Spotizoom — Admin</header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" style="margin-right:auto;">Home</a>
+    <a href="/profile" style="margin:0 auto;">Profile</a>
+    <a href="/admin" class="active" style="margin-left:auto;">Admin</a>
+  </nav>
+  <div class="login-mobile-wrap">
+    <div class="login-card">
+      <h2 class="login-title">Winner Selection Time</h2>
+      <form method="post" action="/admin/time">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="time" name="winner_time" value="<%= winnerTime %>" required>
+        <button type="submit">Save</button>
+      </form>
+      <form method="post" action="/admin/force-winner" style="margin-top:18px;">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" style="background:#e53e3e;color:#fff;">Select new winner now</button>
+      </form>
+      <% if (typeof message !== 'undefined' && message) { %>
+        <div class="login-error"><%= message %></div>
+      <% } %>
+    </div>
+  </div>
+  <footer class="footer" role="contentinfo">© Spotizoom, 2025 | <a href="/privacy" target="_blank" rel="nofollow">Privacy Policy</a></footer>
+</body>
+</html>
